@@ -328,6 +328,8 @@ describe 'Kaminari::ActionViewExtension', :if => defined?(::Rails::Railtie) && d
     context 'the first page' do
       let(:users) { User.page(1).per(10) }
 
+      it { should match(/rel="start"/) }
+      it { should match(/href="\/users"/) }
       it { should_not match(/rel="prev"/) }
       it { should match(/rel="next"/) }
       it { should match(/\?page=2/) }
@@ -336,6 +338,8 @@ describe 'Kaminari::ActionViewExtension', :if => defined?(::Rails::Railtie) && d
     context 'the second page' do
       let(:users) { User.page(2).per(10) }
 
+      it { should match(/rel="start"/) }
+      it { should match(/href="\/users"/) }
       it { should match(/rel="prev"/) }
       it { should_not match(/\?page=1/) }
       it { should match(/rel="next"/) }
@@ -345,6 +349,8 @@ describe 'Kaminari::ActionViewExtension', :if => defined?(::Rails::Railtie) && d
     context 'the last page' do
       let(:users) { User.page(4).per(10) }
 
+      it { should match(/rel="start"/) }
+      it { should match(/href="\/users"/) }
       it { should match(/rel="prev"/) }
       it { should match(/\?page=3"/) }
       it { should_not match(/rel="next"/) }
